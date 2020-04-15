@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;800&display=swap");
+
+body {
+  background-color: #f8fafb;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.ui.header,
+.header.item {
+  font-family: "Roboto Slab", serif;
+}
+
+p,
+b,
+blockquote,
+i,
+li,
+input,
+label,
+textarea {
+  font-family: "Open Sans", sans-serif;
+}
+
+.ui.segment {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.ui.header.fade {
+  font-weight: 400;
+  color: #778ca2;
+}
+
+.ui.text.menu {
+  .item a {
+    font-weight: normal;
+    color: #778ca2;
+  }
+  .item.active a {
+    font-weight: bold;
+    color: #4d7cfe;
+  }
+}
+
+.main-navbar {
+  .active.link.item {
+    background: none !important;
+    border-radius: 0 !important;
+    border-bottom: 3px solid #4D7CFE;
+    padding-bottom: 8px;
+    a {
+      font-weight: bold;
+      color: #4D7CFE;
+    }
+  }
+  .link.item a {
+    color: #778ca2;
+  }
+  .link.item:hover {
+    background: none !important;
+  }
+}
