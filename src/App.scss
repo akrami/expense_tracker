@@ -22,7 +22,8 @@ i,
 li,
 input,
 label,
-textarea {
+textarea,
+.ui.menu {
   font-family: "Open Sans", sans-serif;
 }
 
@@ -48,21 +49,31 @@ textarea {
   }
 }
 
-.main-navbar {
-  .active.link.item {
+.main-navbar.ui.menu {
+  box-shadow: none;
+  border-radius: 0;
+  .header.item .ui.header {
+    font-weight: normal;
+  }
+  .item.active {
     background: none !important;
     border-radius: 0 !important;
-    border-bottom: 3px solid #4D7CFE;
-    padding-bottom: 8px;
-    a {
-      font-weight: bold;
-      color: #4D7CFE;
-    }
+    border-bottom: 3px solid #4d7cfe;
+    padding-bottom: 10px;
+    // font-weight: bold;
+    color: #4d7cfe;
   }
-  .link.item a {
+  .item {
     color: #778ca2;
   }
-  .link.item:hover {
+  .item:before {
+    display: none;
+  }
+  .item:hover {
     background: none !important;
   }
+}
+
+.ui.menu:not(.secondary):not(.text):not(.tabular):not(.borderless)>.container>.item:not(.right):not(.borderless):first-child {
+    border-left: none;
 }
