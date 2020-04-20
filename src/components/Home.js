@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Grid, Header, Segment, Statistic, Table, Label, Icon } from 'semantic-ui-react';
 
 const Home = (props) => {
     const { expenses } = props;
-    const [ total ] = useState(expenses.reduce((acc, exp) => acc += exp.amount ,0));
-
+    const total = expenses.reduce((acc, exp) => acc += parseInt(exp.amount) ,0);
     return (
         <>
             <Grid columns={2}>
@@ -31,9 +30,9 @@ const Home = (props) => {
                         {expenses.map(expense=>{
                             return(
                                 <Table.Row key={expense._id}>
-                                    <Table.Cell><Label horizontal color={expense.amount>0?"blue":"red"}>{expense.category}</Label> {expense.description}</Table.Cell>
+                                    <Table.Cell><Label horizontal color={expense.amount>0?"blue":"orange"}>{expense.category}</Label> {expense.description}</Table.Cell>
                                     <Table.Cell className={expense.amount>0?"positive":"negative"}>{expense.amount>0?"+":""}{expense.amount}<Icon name="dollar" /></Table.Cell>
-                                    <Table.Cell>{expense.when}</Table.Cell>
+                                    <Table.Cell textAlign="right">{expense.when}</Table.Cell>
                                 </Table.Row>
                             )
                         })}
