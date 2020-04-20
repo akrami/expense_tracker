@@ -12,10 +12,7 @@ const App = (props) => {
     useEffect(() => {
         fetch("http://localhost:9090/api/expenses")
             .then(res => res.json())
-            .then(res => {
-                setExpenses(res);
-                console.log('fetched');
-            });
+            .then(res => setExpenses(res));
     }, [update]);
 
     const newExpenseHandler = data => {

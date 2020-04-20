@@ -54,7 +54,7 @@ const Navbar = props => {
                 </Modal.Content>
                 <Modal.Actions>
                     <Button secondary onClick={() => setModal(false)}>Cancel</Button>
-                    <Button type="Submit" primary onClick={()=>{
+                    <Button type="Submit" primary onClick={() => {
                         newExpenseHandler({
                             category,
                             description,
