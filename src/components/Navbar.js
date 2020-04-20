@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Menu, Container, Header, Icon, Modal, Form, Button } from 'semantic-ui-react';
 import { Link, useLocation } from 'react-router-dom';
-const Navbar = (props) => {
+const Navbar = props => {
+    const newExpenseHandler = props.onNewExpense;
+
     let location = useLocation();
     const now = new Date();
     const datetime = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate() + ' ' + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
@@ -53,14 +55,12 @@ const Navbar = (props) => {
                 <Modal.Actions>
                     <Button secondary onClick={() => setModal(false)}>Cancel</Button>
                     <Button type="Submit" primary onClick={()=>{
-                        const newExpense = {
-                            '_id': Math.floor(Math.random()*1000000000),
+                        newExpenseHandler({
                             category,
                             description,
                             amount,
                             when
-                        }
-                        props.onExpenseChange([newExpense, ...props.expenses]);
+                        });
                         setModal(false);
                     }}><Icon name="add" /> Add</Button>
                 </Modal.Actions>

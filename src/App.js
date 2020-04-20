@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 import Home from './components/Home';
@@ -6,44 +6,44 @@ import Calendar from './components/Calendar';
 import Navbar from './components/Navbar';
 
 const App = (props) => {
-    
-    const [expenses, setExpenses] = useState([
-        {
-            "_id" : "5e96442b8a2fef2b68d6aee8",
-            "category" : "Car",
-            "description" : "New Tires",
-            "amount" : -1000,
-            "when" : "2020-04-14T22:30:00.000Z"
-        },{
-            "_id" : "5e96445f8a2fef2b68d6aee9",
-            "category" : "Work",
-            "description" : "Salary",
-            "amount" : 4500,
-            "when" : "2020-04-13T05:30:00.000Z"
-        },{
-            "_id" : "5e9648a87eb26346e04b06b8",
-            "category" : "Education",
-            "description" : "University tuition",
-            "amount" : -1000,
-            "when" : "2020-04-14T07:30:00.000Z"
-        },{
-            "_id" : "5e9648da7eb26346e04b06b9",
-            "category" : "Education",
-            "description" : "Thermodynamic book",
-            "amount" : -450,
-            "when" : "2020-04-14T15:00:00.000Z"
-        }
-    ]);
+
+    const [expenses, setExpenses] = useState([]);
+    const [update, setUpdate] = useState(false);
+    useEffect(() => {
+        fetch("http://localhost:9090/api/expenses")
+            .then(res => res.json())
+            .then(res => {
+                setExpenses(res);
+                console.log('fetched');
+            });
+    }, [update]);
+
+    const newExpenseHandler = data => {
+        const { category, description, amount, when } = data;
+        fetch('http://localhost:9090/api/expenses', {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                category,
+                description,
+                amount,
+                when
+            })
+        })
+            .then(response => response.json())
+            .then(response => setUpdate(!update))
+            .catch(error => console.log(error));
+    }
 
     return (
         <Router>
-                <Navbar expenses={expenses} onExpenseChange={setExpenses} />
-                <Container>
-                    <Switch>
-                        <Route exact path="/" render={(props)=><Home {...props} expenses={expenses} />} />
-                        <Route path="/calendar" component={Calendar} />
-                    </Switch>
-                </Container>
+            <Navbar expenses={expenses} onNewExpense={newExpenseHandler} />
+            <Container>
+                <Switch>
+                    <Route exact path="/" render={(props) => <Home {...props} expenses={expenses} />} />
+                    <Route path="/calendar" component={Calendar} />
+                </Switch>
+            </Container>
         </Router>
     );
 }
