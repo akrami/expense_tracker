@@ -23,7 +23,8 @@ li,
 input,
 label,
 textarea,
-.ui.menu {
+.ui.menu,
+td, th {
   font-family: "Open Sans", sans-serif;
 }
 
@@ -76,4 +77,14 @@ textarea,
 
 .ui.menu:not(.secondary):not(.text):not(.tabular):not(.borderless)>.container>.item:not(.right):not(.borderless):first-child {
     border-left: none;
+}
+
+.ui.table td.negative {
+  background: none !important;
+  color: red !important;
+}
+
+.ui.table td.positive {
+  background: none !important;
+  color: blue !important;
 }
