@@ -2,8 +2,7 @@ import React from 'react';
 import { Grid, Header, Segment, Statistic, Table, Label, Icon } from 'semantic-ui-react';
 
 const Home = (props) => {
-    const { expenses } = props;
-    const total = expenses.reduce((acc, exp) => acc += parseInt(exp.amount), 0);
+    const { expenses, total } = props;
     return (
         <>
             <Grid columns={2}>
