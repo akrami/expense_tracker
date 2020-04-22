@@ -31,20 +31,9 @@ const Home = (props) => {
                                 <Table.Row key={expense._id}>
                                     <Table.Cell><Label horizontal color={expense.amount > 0 ? "blue" : "orange"}>{expense.category}</Label> {expense.description}</Table.Cell>
                                     <Table.Cell className={expense.amount > 0 ? "positive" : "negative"}>{expense.amount > 0 ? "+" : ""}{expense.amount}<Icon name="dollar" /></Table.Cell>
-                                    <Table.Cell textAlign="right">{
-                                        new Intl.DateTimeFormat("en-US", {
-                                            year: 'numeric',
-                                            month: 'numeric',
-                                            day: 'numeric'
-                                        }).format(new Date(expense.when))
-                                    } <span className="fade">{
-                                        new Intl.DateTimeFormat("en-US", {
-                                            hour: 'numeric',
-                                            minute: 'numeric',
-                                            second: 'numeric',
-                                            hour12: false
-                                        }).format(new Date(expense.when))
-                                    }</span></Table.Cell>
+                                    <Table.Cell textAlign="right">
+                                        {new Date(expense.when).toLocaleDateString()} <span className="fade">{(new Date(expense.when)).toLocaleTimeString()}</span>
+                                    </Table.Cell>
                                 </Table.Row>
                             )
                         })}
