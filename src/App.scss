@@ -24,7 +24,8 @@ input,
 label,
 textarea,
 .ui.menu,
-td, th {
+td,
+th {
   font-family: "Open Sans", sans-serif;
 }
 
@@ -75,8 +76,10 @@ td, th {
   }
 }
 
-.ui.menu:not(.secondary):not(.text):not(.tabular):not(.borderless)>.container>.item:not(.right):not(.borderless):first-child {
-    border-left: none;
+.ui.menu:not(.secondary):not(.text):not(.tabular):not(.borderless)
+  > .container
+  > .item:not(.right):not(.borderless):first-child {
+  border-left: none;
 }
 
 .ui.table td.negative {
@@ -91,4 +94,25 @@ td, th {
 
 span.fade {
   color: #888888;
+}
+
+#d3-30-days {
+  height: 150px;
+  svg {
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    .line {
+      fill: none;
+      stroke: url(#line-gradient);
+      stroke-width: 5;
+  }
+  }
+  .statistic {
+    position: relative;
+    z-index: 1;
+  }
 }

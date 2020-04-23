@@ -1,19 +1,15 @@
 import React from 'react';
-import { Grid, Header, Segment, Statistic, Table, Label, Icon } from 'semantic-ui-react';
+import { Grid, Header, Segment, Table, Label, Icon } from 'semantic-ui-react';
+import Total from './home/Total';
 
 const Home = (props) => {
-    const { expenses, total } = props;
+    const { expenses, total, days } = props;
     return (
         <>
-            <Grid columns={2}>
+            <Grid columns={2} stackable>
                 <Grid.Row>
                     <Grid.Column>
-                        <Header as="h4" content="CASH" className="fade" />
-                        <Segment>
-                            <Statistic color={total > 0 ? 'blue' : 'red'}>
-                                <Statistic.Value>{total}$</Statistic.Value>
-                            </Statistic>
-                        </Segment>
+                        <Total total={total} days={days} />
                     </Grid.Column>
                     <Grid.Column>
                         <Header as="h4" content="FLOW" className="fade" />

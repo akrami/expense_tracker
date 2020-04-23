@@ -9,6 +9,7 @@ const App = (props) => {
 
     const [expenses, setExpenses] = useState([]);
     const [total, setTotal] = useState(0);
+    const [days, setDays] = useState([]);
     const [update, setUpdate] = useState(false);
     useEffect(() => {
         fetch("http://localhost:9090/api/expenses")
@@ -18,6 +19,10 @@ const App = (props) => {
         fetch("http://localhost:9090/api/expenses/total")
             .then(result => result.json())
             .then(result => setTotal(result[0].total));
+
+        fetch("http://localhost:9090/api/expenses/data/last30days")
+        .then(result=>result.json())
+        .then(result=>setDays(result));
     }, [update]);
 
     const newExpenseHandler = data => {
@@ -42,7 +47,7 @@ const App = (props) => {
             <Navbar expenses={expenses} onNewExpense={newExpenseHandler} />
             <Container>
                 <Switch>
-                    <Route exact path="/" render={(props) => <Home {...props} expenses={expenses} total={total} />} />
+                    <Route exact path="/" render={(props) => <Home {...props} expenses={expenses} total={total} days={days} />} />
                     <Route path="/calendar" component={Calendar} />
                 </Switch>
             </Container>
