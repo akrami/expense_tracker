@@ -34,13 +34,13 @@ const Total = props => {
             .attr("x2", 0).attr("y2", y(500))
             .selectAll("stop")
             .data([
-                {offset: "0%", color: "#ff668c"},
-                {offset: "100%", color: "#8ac9e2"}
+                { offset: "0%", color: "#ff668c" },
+                { offset: "100%", color: "#8ac9e2" }
             ])
             .enter()
             .append("stop")
-            .attr("offset", d=>d.offset)
-            .attr("stop-color", d=>d.color);
+            .attr("offset", d => d.offset)
+            .attr("stop-color", d => d.color);
     }
 
     return (

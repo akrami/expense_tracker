@@ -21,8 +21,8 @@ const App = (props) => {
             .then(result => setTotal(result[0].total));
 
         fetch("http://localhost:9090/api/expenses/data/last30days")
-        .then(result=>result.json())
-        .then(result=>setDays(result));
+            .then(result => result.json())
+            .then(result => setDays(result));
     }, [update]);
 
     const newExpenseHandler = data => {

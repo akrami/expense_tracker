@@ -22,7 +22,7 @@ const Navbar = props => {
                     </Menu.Item>
                     <Link to="/" className={location.pathname === '/' ? 'item active' : 'item'}><Icon name="warehouse" /> Home</Link>
                     <Link to="/calendar" className={location.pathname.startsWith("/calendar") ? 'item active' : 'item'}><Icon name="calendar alternate outline" /> Calendar</Link>
-                    <Menu.Item position="right" link onClick={() => setModal(true)}>
+                    <Menu.Item position="right" link onClick={() => { setModal(true); setWhen(datetime) }}>
                         <Icon size="large" name="add circle" />
                     </Menu.Item>
                 </Container>
@@ -61,6 +61,10 @@ const Navbar = props => {
                             amount,
                             when
                         });
+                        setCategory('');
+                        setDescription('');
+                        setAmount(0);
+                        setWhen(datetime);
                         setModal(false);
                     }}><Icon name="add" /> Add</Button>
                 </Modal.Actions>
