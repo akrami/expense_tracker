@@ -1,9 +1,10 @@
 import React from 'react';
 import { Grid, Header, Segment, Table, Label, Icon } from 'semantic-ui-react';
 import Total from './home/Total';
+import Tops from './home/Tops';
 
 const Home = (props) => {
-    const { expenses, total, days } = props;
+    const { expenses, total, days, tops } = props;
     return (
         <>
             <Grid columns={2} stackable>
@@ -12,9 +13,7 @@ const Home = (props) => {
                         <Total total={total} days={days} />
                     </Grid.Column>
                     <Grid.Column>
-                        <Header as="h4" content="FLOW" className="fade" />
-                        <Segment>
-                        </Segment>
+                        <Tops tops={tops} />
                     </Grid.Column>
                 </Grid.Row>
             </Grid>

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Header, Segment, Statistic } from 'semantic-ui-react';
+import { Header, Segment } from 'semantic-ui-react';
 import * as d3 from "d3";
 
 const Total = props => {
@@ -7,7 +7,7 @@ const Total = props => {
     const { total, days } = props;
 
     useEffect(()=>{
-        if (days.length !== 0) {
+        if (days.length > 0) {
             const count = days.length;
             var svg = d3.select("#d3-30-days svg");
 
