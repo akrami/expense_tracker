@@ -17,7 +17,7 @@ const Home = (props) => {
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
-            <Header as="h4" content="History" className="fade" />
+            <Header as="h4" content="Last 20 Transactions" className="fade" />
             <Segment>
                 <Table basic="very">
                     <Table.Body>
