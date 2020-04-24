@@ -42,11 +42,11 @@ const Tops = props => {
                     .attr("name", key)
                     .append("text")
                     .attr("x", 65)
-                    .attr("y", y(key)+10)
+                    .attr("y", y(key) + 10)
                     .attr("style", "text-anchor: end")
-                    .attr("font-family","monospace")
+                    .attr("font-family", "monospace")
                     .attr("font-size", "12px")
-                    .text(key.substring(0,10));
+                    .text(key.substring(0, 10));
             });
 
             dataset.forEach(d => {
