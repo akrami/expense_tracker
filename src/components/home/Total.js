@@ -10,6 +10,7 @@ const Total = props => {
         if (days.length > 0) {
             const count = days.length;
             var svg = d3.select("#d3-30-days svg");
+            svg.selectAll('*').remove();
 
             var x = d3.scaleLinear()
                 .domain([0, count - 1])

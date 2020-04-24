@@ -16,7 +16,7 @@ const Tops = props => {
 
             let svg = d3.select("#d3-top-categories svg");
 
-            svg.empty();
+            svg.selectAll('*').remove();
 
             let keys = data.map(d => d._id);
 
