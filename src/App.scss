@@ -133,3 +133,15 @@ span.fade {
     width: 100%;
   }
 }
+
+#month-table {
+  th {
+    h2 {
+      display: inline;
+    }
+  }
+  td {
+    height: 100px;
+    vertical-align: top;
+  }
+}
