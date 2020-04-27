@@ -15,11 +15,20 @@ const Calendar = () => {
     const [month, setMonth] = useState(today.getMonth());
     const [year, setYear] = useState(today.getFullYear());
 
+    const [monthData, setMonthData] = useState([]);
+
     useEffect(() => {
         setDay(date.getDay());
         setMonth(date.getMonth());
         setYear(date.getFullYear());
     }, [date]);
+
+    useEffect(() => {
+        fetch(`http://localhost:9090/api/expenses/month/${year}/${month+1}`)
+        .then(result=>result.json())
+        .then(result=> setMonthData(result));
+        
+    }, [month, year]);
 
     return (
         <>
@@ -28,7 +37,7 @@ const Calendar = () => {
                 <Segment>
                     <Switch>
                         <Route exact path="/calendar/">
-                            <Month month={month} year={year} setDate={setDate} />
+                            <Month month={month} year={year} monthData={monthData} setDate={setDate} />
                         </Route>
                         <Route path="/calendar/week">
                             <Week />

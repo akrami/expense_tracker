@@ -2,13 +2,18 @@ import React from "react";
 import { Button, Table, Icon, Header } from "semantic-ui-react";
 
 const Month = props => {
-    const { month, year, setDate } = props
+    const { month, year, setDate, monthData } = props
 
     const startDayOfMonth = new Date(year, month, 1).getDay();
     const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Augist', 'September', 'October', 'November', 'December'];
     const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
     const days = [31, isLeapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+    monthData.map(each => {
+        each.date = new Date(each.date).toLocaleDateString();
+        return each;
+    });
 
     return (
         <>
@@ -33,12 +38,21 @@ const Month = props => {
                             return (
                                 <Table.Row key={weekIndex}>
                                     {Array(7).fill(null).map((_, dayIndex) => {
-                                        const temp = (weekIndex * 7 + dayIndex) - startDayOfMonth + 1;
-                                        return (<Table.Cell key={dayIndex}>{(temp > 0 && temp <= days[month]) ? <div className="ui circular label">{temp}</div> : ''}</Table.Cell>);
+                                        const theDay = (weekIndex * 7 + dayIndex) - startDayOfMonth + 1;
+                                        const today = new Date();
+                                        const isToday = (theDay === today.getDate() && month === today.getMonth() && year === today.getFullYear());
+                                        if (theDay > 0 && theDay <= days[month]) {
+                                            return (<Table.Cell key={theDay} className={isToday ? 'today day' : 'day'}>
+                                                <Header as="h4">{theDay}</Header>
+                                                <div className="blue">{monthData[theDay - 1]?monthData[theDay - 1]['income']:0}</div>
+                                                <div className="red">{monthData[theDay - 1]?monthData[theDay - 1]['expense']:0}</div>
+                                            </Table.Cell>);
+                                        } else {
+                                            return (<Table.Cell key={theDay}></Table.Cell>);
+                                        }
                                     })}
                                 </Table.Row>
                             )
-                            // return (<div key={index}>{index}:{index - startDayOfMonth + 1}:{weekDays[index % 7]}</div>)
                         })
                     }
                 </Table.Body>

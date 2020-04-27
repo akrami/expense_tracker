@@ -25,7 +25,7 @@ const App = (props) => {
             .then(result => result.json())
             .then(result => setDays(result));
 
-        fetch("httP://localhost:9090/api/expenses/data/top-categories")
+        fetch("http://localhost:9090/api/expenses/data/top-categories")
             .then(result=>result.json())
             .then(result=>setTop(result));
     }, [update]);

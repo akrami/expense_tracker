@@ -144,4 +144,19 @@ span.fade {
     height: 100px;
     vertical-align: top;
   }
+  td.today {
+    background-color: rgb(184, 234, 255);
+  }
+  td.day:hover {
+    background-color: #E8E8E8;
+    cursor: pointer;
+  }
+}
+
+.blue {
+  color: #247BA0;
+}
+
+.red {
+  color: #FF1654;
 }
