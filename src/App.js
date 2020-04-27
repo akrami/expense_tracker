@@ -13,6 +13,8 @@ const App = (props) => {
     const [top, setTop] = useState([]);
     const [update, setUpdate] = useState(false);
     useEffect(() => {
+        console.log('App useEffect');
+
         fetch("http://localhost:9090/api/expenses")
             .then(result => result.json())
             .then(result => setExpenses(result));
@@ -43,7 +45,7 @@ const App = (props) => {
             })
         })
             .then(response => response.json())
-            .then(response => setUpdate(!update))
+            .then(() => setUpdate(!update))
             .catch(error => console.log(error));
     }
 
@@ -52,8 +54,10 @@ const App = (props) => {
             <Navbar expenses={expenses} onNewExpense={newExpenseHandler} />
             <Container>
                 <Switch>
-                    <Route exact path="/" render={(props) => <Home {...props} expenses={expenses} total={total} days={days} tops={top} />} />
-                    <Route path="/calendar" component={Calendar} />
+                    <Route exact path="/" render={props => <Home {...props} expenses={expenses} total={total} days={days} tops={top} />} />
+                    <Route path="/calendar">
+                        <Calendar update={update} />
+                    </Route>
                 </Switch>
             </Container>
         </Router>

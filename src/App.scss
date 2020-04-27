@@ -160,3 +160,26 @@ span.fade {
 .red {
   color: #ff1654;
 }
+
+#week-table {
+  th {
+    .sub {
+      font-weight: normal;
+    }
+  }
+  th.today {
+    background-image: linear-gradient(
+      rgba(184, 234, 255, 0),
+      rgba(184, 234, 255, 0.1),
+      rgba(184, 234, 255, 1)
+    );
+  }
+  .index {
+    font-family: monospace;
+    font-size: 0.9em;
+    color: #555555;
+  }
+  .weekend {
+    background-color: #eeeeee;
+  }
+}
