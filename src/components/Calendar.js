@@ -24,10 +24,10 @@ const Calendar = () => {
     }, [date]);
 
     useEffect(() => {
-        fetch(`http://localhost:9090/api/expenses/month/${year}/${month+1}`)
-        .then(result=>result.json())
-        .then(result=> setMonthData(result));
-        
+        fetch(`http://localhost:9090/api/expenses/month/${year}/${month + 1}`)
+            .then(result => result.json())
+            .then(result => setMonthData(result));
+
     }, [month, year]);
 
     return (

@@ -26,8 +26,8 @@ const App = (props) => {
             .then(result => setDays(result));
 
         fetch("http://localhost:9090/api/expenses/data/top-categories")
-            .then(result=>result.json())
-            .then(result=>setTop(result));
+            .then(result => result.json())
+            .then(result => setTop(result));
     }, [update]);
 
     const newExpenseHandler = data => {

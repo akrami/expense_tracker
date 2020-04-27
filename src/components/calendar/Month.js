@@ -44,8 +44,8 @@ const Month = props => {
                                         if (theDay > 0 && theDay <= days[month]) {
                                             return (<Table.Cell key={theDay} className={isToday ? 'today day' : 'day'}>
                                                 <Header as="h4">{theDay}</Header>
-                                                <div className="blue">{monthData[theDay - 1]?monthData[theDay - 1]['income']:0}</div>
-                                                <div className="red">{monthData[theDay - 1]?monthData[theDay - 1]['expense']:0}</div>
+                                                <div className="blue">{monthData[theDay - 1] ? monthData[theDay - 1]['income'] : 0}</div>
+                                                <div className="red">{monthData[theDay - 1] ? monthData[theDay - 1]['expense'] : 0}</div>
                                             </Table.Cell>);
                                         } else {
                                             return (<Table.Cell key={theDay}></Table.Cell>);
