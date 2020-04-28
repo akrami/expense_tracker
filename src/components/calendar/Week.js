@@ -7,12 +7,12 @@ const Week = props => {
     const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
     let customData = [];
-    weekData.map(each => {
-        const tempDate = new Date(new Date(each.date).toLocaleString());
-        customData[`${tempDate.toLocaleDateString()} ${tempDate.getHours()}`] = each.total;
-    });
-
-    console.log({ weekData, customData });
+    if (Array.isArray(weekData) && weekData.length > 0) {
+        weekData.forEach(each => {
+            const tempDate = new Date(new Date(each.date).toLocaleString());
+            customData[`${tempDate.toLocaleDateString()} ${tempDate.getHours()}`] = each.total;
+        });
+    }
 
     return (
         <Table id="week-table" compact="very">

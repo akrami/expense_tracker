@@ -10,34 +10,39 @@ const Calendar = props => {
     const { update } = props;
 
     const today = new Date();
-
     const [date, setDate] = useState(new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0, 0));
 
     const [monthData, setMonthData] = useState([]);
     const [weekData, setWeekData] = useState([]);
+    const [dayData, setDayData] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        console.log('Calendar useEffect');
+        const fetchData = async () => {
+            setLoading(true);
+            await fetch(`http://localhost:9090/api/expenses/month/${date.getFullYear()}/${date.getMonth()}`)
+                .then(result => result.json())
+                .then(result => setMonthData(result));
 
-        fetch(`http://localhost:9090/api/expenses/month/${date.getFullYear()}/${date.getMonth()}`)
-            .then(result => result.json())
-            .then(result => setMonthData(result));
+            await fetch(`http://localhost:9090/api/expenses/week/${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`)
+                .then(result => result.json())
+                .then(result => setWeekData(result));
 
-        fetch(`http://localhost:9090/api/expenses/week/${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`)
-            .then(result => result.json())
-            .then(result => {
-                console.log(`http://localhost:9090/api/expenses/week/${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`)
-                console.log(result);
-                setWeekData(result)
-            });
+            await fetch(`http://localhost:9090/api/expenses/day/${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`)
+                .then(result => result.json())
+                .then(result => setDayData(result));
 
+            setLoading(false);
+        }
+
+        fetchData();
     }, [date, update]);
 
     return (
         <>
             <Router>
                 <Navbar />
-                <Segment>
+                <Segment loading={loading}>
                     <Switch>
                         <Route exact path="/calendar/">
                             <Month month={date.getMonth()} year={date.getFullYear()} monthData={monthData} setDate={setDate} />
@@ -46,7 +51,7 @@ const Calendar = props => {
                             <Week day={date.getDate()} month={date.getMonth()} year={date.getFullYear()} setDate={setDate} weekData={weekData} />
                         </Route>
                         <Route path="/calendar/day">
-                            <Day />
+                            <Day day={date.getDate()} month={date.getMonth()} year={date.getFullYear()} setDate={setDate} dayData={dayData} />
                         </Route>
                     </Switch>
                 </Segment>

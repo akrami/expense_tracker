@@ -13,23 +13,27 @@ const App = (props) => {
     const [top, setTop] = useState([]);
     const [update, setUpdate] = useState(false);
     useEffect(() => {
-        console.log('App useEffect');
 
-        fetch("http://localhost:9090/api/expenses")
-            .then(result => result.json())
-            .then(result => setExpenses(result));
+        const fetchData = async () => {
+            await fetch("http://localhost:9090/api/expenses")
+                .then(result => result.json())
+                .then(result => setExpenses(result));
 
-        fetch("http://localhost:9090/api/expenses/total")
-            .then(result => result.json())
-            .then(result => setTotal(result[0].total));
+            await fetch("http://localhost:9090/api/expenses/total")
+                .then(result => result.json())
+                .then(result => setTotal(result[0].total));
 
-        fetch("http://localhost:9090/api/expenses/data/last30days")
-            .then(result => result.json())
-            .then(result => setDays(result));
+            await fetch("http://localhost:9090/api/expenses/data/last30days")
+                .then(result => result.json())
+                .then(result => setDays(result));
 
-        fetch("http://localhost:9090/api/expenses/data/top-categories")
-            .then(result => result.json())
-            .then(result => setTop(result));
+            await fetch("http://localhost:9090/api/expenses/data/top-categories")
+                .then(result => result.json())
+                .then(result => setTop(result));
+        }
+
+        fetchData();
+
     }, [update]);
 
     const newExpenseHandler = data => {
