@@ -42,7 +42,7 @@ const Month = props => {
                                         const today = new Date();
                                         const isToday = (theDay === today.getDate() && month === today.getMonth() && year === today.getFullYear());
                                         if (theDay > 0 && theDay <= days[month]) {
-                                            return (<Table.Cell key={theDay} className={isToday ? 'today day' : 'day'} onClick={()=>{
+                                            return (<Table.Cell key={theDay} className={isToday ? 'today day' : 'day'} onClick={() => {
                                                 setDate(new Date(year, month, theDay, 0, 0, 0, 0));
                                                 history.push('/calendar/day');
                                             }}>

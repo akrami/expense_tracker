@@ -58,9 +58,9 @@ const App = (props) => {
             <Navbar expenses={expenses} onNewExpense={newExpenseHandler} />
             <Container>
                 <Switch>
-                    <Route exact path="/" render={props => <Home {...props} expenses={expenses} total={total} days={days} tops={top} />} />
+                    <Route exact path="/" render={props => <Home {...props} expenses={expenses} total={total} days={days} tops={top} setUpdate={setUpdate} update={update} />} />
                     <Route path="/calendar">
-                        <Calendar update={update} />
+                        <Calendar update={update} setUpdate={setUpdate} />
                     </Route>
                 </Switch>
             </Container>

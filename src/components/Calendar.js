@@ -7,7 +7,7 @@ import Day from "./calendar/Day";
 import Navbar from './calendar/Navbar';
 
 const Calendar = props => {
-    const { update } = props;
+    const { update, setUpdate } = props;
 
     const today = new Date();
     const [date, setDate] = useState(new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0, 0));
@@ -49,7 +49,7 @@ const Calendar = props => {
                             <Week day={date.getDate()} month={date.getMonth()} year={date.getFullYear()} setDate={setDate} weekData={weekData} />
                         </Route>
                         <Route path="/calendar/day">
-                            <Day day={date.getDate()} month={date.getMonth()} year={date.getFullYear()} setDate={setDate} dayData={dayData} />
+                            <Day day={date.getDate()} month={date.getMonth()} year={date.getFullYear()} setDate={setDate} dayData={dayData} update={update} setUpdate={setUpdate} />
                         </Route>
                     </Switch>
                 </Segment>

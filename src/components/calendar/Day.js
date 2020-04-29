@@ -2,10 +2,16 @@ import React from "react";
 import { Segment, Header, Button, Icon, Table, Label } from "semantic-ui-react";
 
 const Day = props => {
-    const { day, month, year, setDate, dayData } = props;
+    const { day, month, year, setDate, dayData, update, setUpdate } = props;
     const theDay = new Date(year, month, day, 0, 0, 0, 0);
     const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Augist', 'September', 'October', 'November', 'December'];
+
+    const removeExpense = (id) => {
+        fetch("http://localhost:9090/api/expenses/" + id, {
+            method: 'DELETE'
+        }).then(() => setUpdate(!update));
+    }
 
     return (
         <>
@@ -25,14 +31,14 @@ const Day = props => {
                 <Header as="h2">{theDay.toLocaleDateString()}, {weekDays[theDay.getDay()]}</Header>
             </Segment>
 
-            <Table basic="very">
+            <Table>
                 <Table.Body>
                     {
                         (Array.isArray(dayData) && dayData.length > 0) ?
                             dayData.map(expense => {
                                 return (
                                     <Table.Row key={expense._id}>
-                                        <Table.Cell><Label horizontal color={expense.amount > 0 ? "blue" : "orange"}>{expense.category}</Label> {expense.description}</Table.Cell>
+                                        <Table.Cell className="expense"><Icon link bordered size="small" color="red" onClick={() => removeExpense(expense._id)} name="remove" /><Label horizontal color={expense.amount > 0 ? "blue" : "orange"}>{expense.category}</Label> {expense.description}</Table.Cell>
                                         <Table.Cell className={expense.amount > 0 ? "positive" : "negative"}>{expense.amount > 0 ? "+" : ""}{expense.amount}<Icon name="dollar" /></Table.Cell>
                                         <Table.Cell textAlign="right">
                                             {new Date(expense.when).toLocaleDateString()} <span className="fade">{(new Date(expense.when)).toLocaleTimeString()}</span>

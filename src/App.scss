@@ -183,3 +183,18 @@ span.fade {
     background-color: #eeeeee;
   }
 }
+
+.expense {
+  position: relative;
+  i.red.icon {
+    position: absolute;
+    left: -21px;
+    background-color: #db2828 !important;
+    color: white !important;
+    display: none;
+  }
+}
+
+.expense:hover i.red.icon {
+  display: inline-block;
+}
