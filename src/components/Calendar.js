@@ -44,9 +44,7 @@ const Calendar = props => {
                 <Navbar />
                 <Segment loading={loading}>
                     <Switch>
-                        <Route exact path="/calendar/">
-                            <Month month={date.getMonth()} year={date.getFullYear()} monthData={monthData} setDate={setDate} />
-                        </Route>
+                        <Route exact path="/calendar/" component={props => <Month month={date.getMonth()} year={date.getFullYear()} monthData={monthData} setDate={setDate} {...props} />} />
                         <Route path="/calendar/week">
                             <Week day={date.getDate()} month={date.getMonth()} year={date.getFullYear()} setDate={setDate} weekData={weekData} />
                         </Route>

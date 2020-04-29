@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Table, Icon, Header } from "semantic-ui-react";
 
 const Month = props => {
-    const { month, year, setDate, monthData } = props
+    const { month, year, setDate, monthData, history } = props
 
     const startDayOfMonth = new Date(year, month, 1).getDay();
     const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -42,7 +42,10 @@ const Month = props => {
                                         const today = new Date();
                                         const isToday = (theDay === today.getDate() && month === today.getMonth() && year === today.getFullYear());
                                         if (theDay > 0 && theDay <= days[month]) {
-                                            return (<Table.Cell key={theDay} className={isToday ? 'today day' : 'day'}>
+                                            return (<Table.Cell key={theDay} className={isToday ? 'today day' : 'day'} onClick={()=>{
+                                                setDate(new Date(year, month, theDay, 0, 0, 0, 0));
+                                                history.push('/calendar/day');
+                                            }}>
                                                 <Header as="h4">{theDay}</Header>
                                                 <div className="blue">{monthData[theDay - 1] ? monthData[theDay - 1]['income'] : 0}</div>
                                                 <div className="red">{monthData[theDay - 1] ? monthData[theDay - 1]['expense'] : 0}</div>
