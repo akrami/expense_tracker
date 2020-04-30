@@ -11,6 +11,7 @@ const App = (props) => {
     const [total, setTotal] = useState(0);
     const [days, setDays] = useState([]);
     const [top, setTop] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [update, setUpdate] = useState(false);
     useEffect(() => {
 
@@ -30,6 +31,10 @@ const App = (props) => {
             await fetch("http://localhost:9090/api/expenses/data/top-categories")
                 .then(result => result.json())
                 .then(result => setTop(result));
+
+            await fetch("http://localhost:9090/api/expenses/categories")
+                .then(result => result.json())
+                .then(result => setCategories(result));
         }
 
         fetchData();
@@ -55,7 +60,7 @@ const App = (props) => {
 
     return (
         <Router>
-            <Navbar expenses={expenses} onNewExpense={newExpenseHandler} />
+            <Navbar categories={categories} newExpenseHandler={newExpenseHandler} />
             <Container>
                 <Switch>
                     <Route exact path="/" render={props => <Home {...props} expenses={expenses} total={total} days={days} tops={top} setUpdate={setUpdate} update={update} />} />

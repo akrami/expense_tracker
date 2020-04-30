@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
-import { Menu, Container, Header, Icon, Modal, Form, Button } from 'semantic-ui-react';
+import { Menu, Container, Header, Icon, Modal, Form, Button, Search } from 'semantic-ui-react';
 import { Link, useLocation } from 'react-router-dom';
 const Navbar = props => {
-    const newExpenseHandler = props.onNewExpense;
+    const { newExpenseHandler, categories } = props;
+
+    const convertCategories = (categories) => {
+        let convertedCategories = [];
+        categories.forEach(category => convertedCategories.push({ title: category }));
+        return convertedCategories
+    }
 
     let location = useLocation();
     const now = new Date();
@@ -13,6 +19,17 @@ const Navbar = props => {
     const [description, setDescription] = useState('');
     const [amount, setAmount] = useState(0);
     const [when, setWhen] = useState(datetime);
+    const [searchLoading, setSearchLoading] = useState(false);
+    const [searchResults, setSearchResults] = useState([]);
+
+    const handleSearchSelect = (e, { result }) => setCategory(result.title);
+    const handleSearchChange = e => {
+        setSearchLoading(true);
+        setSearchResults(convertCategories(categories.filter(category => category.toLowerCase().includes(e.target.value.toLowerCase()))));
+        setCategory(e.target.value);
+        setSearchLoading(false);
+    }
+
     return (
         <>
             <Menu className="main-navbar">
@@ -33,7 +50,7 @@ const Navbar = props => {
                     <Form>
                         <Form.Field>
                             <label>Category</label>
-                            <input placeholder="Category" value={category} onChange={event => setCategory(event.target.value)} />
+                            <Search loading={searchLoading} onResultSelect={handleSearchSelect} onSearchChange={handleSearchChange} results={searchResults} value={category} />
                         </Form.Field>
 
                         <Form.Field>
